@@ -1,3 +1,3 @@
 #! /bin/bash
 
-docker run -v ${PWD}/:/app/ -it --rm compile-latex-container 
+docker run -v ${PWD}/:/app/ -it --rm docker.pkg.github.com/jgero/latex-container/compile-latex-container:1.0
