@@ -7,7 +7,7 @@ ENV TZ=Europe/Berlin
 ENV DEBIAN_FRONTEND=noninteractive
 
 # update and install latex
-RUN apt-get update && apt-get install -y texlive-xetex biber
+RUN apt-get update && apt-get install -y texlive-xetex lexlive-fonts-extra biber
 
 # copy the script for compiling
 COPY compileLatexContainer.sh /bin/compileLatex
