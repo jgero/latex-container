@@ -1,14 +1,19 @@
 name: ci
 
 on:
-  workflow_dispatch:
   push:
-    branches: [master]
+    tags:
+      - 'v*'
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
+      - 
+        name: Set env
+        uses: actions/checkout@v1
+        # use hint from this stackoverflow answer https://stackoverflow.com/a/58195087/13360987
+        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -27,8 +32,9 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
+          # the setting in github from this comment was needed to make it work: https://github.com/docker/build-push-action/issues/205#issuecomment-728894085
           push: true
-          tags: ghcr.io/jgero/latex-container/compile-latex-container:latest
+          tags: ghcr.io/jgero/latex-container/compile-latex-container:$RELEASE_VERSION
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
