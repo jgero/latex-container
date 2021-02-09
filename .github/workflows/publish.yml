@@ -35,7 +35,7 @@ jobs:
         with:
           # the setting in github from this comment was needed to make it work: https://github.com/docker/build-push-action/issues/205#issuecomment-728894085
           push: true
-          tags: ghcr.io/jgero/latex-container/compile-latex-container:$RELEASE_VERSION
+          tags: ghcr.io/jgero/latex-container/compile-latex-container:$GIT_TAG
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
