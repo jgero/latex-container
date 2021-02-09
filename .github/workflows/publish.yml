@@ -9,9 +9,10 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
+      -
+        uses: actions/checkout@v1
       - 
         name: Set env
-        uses: actions/checkout@v1
         # use hint from this stackoverflow answer https://stackoverflow.com/a/58195087/13360987
         run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
       -
